@@ -22,27 +22,29 @@ public class SQLRepository {
         executor.updateQuery(CREATE_TABLE_QUERY);
     }
 
-    public void insert(@NotNull UserHome user){
-        Bukkit.getConsoleSender().sendMessage("§8Inserindo jogador na tabela...");
-        CompletableFuture.runAsync(() -> executor.updateQuery(INSERT_ONE_QUERY, stat ->{
-            stat.set(1, user.getUuid());
+    public void insert(@NotNull UserHome user) {
+        String homesJson = GSON.toJson(user.getHomeList());
+        CompletableFuture.runAsync(() -> executor.updateQuery(INSERT_ONE_QUERY, stat -> {
+            stat.set(1, user.getUuid().toString());
             stat.set(2, user.getName());
-            stat.set(3, user.getLastDied());
-            stat.set(4, GSON.toJson(user.getHomeList()));
+            stat.set(3, homesJson);
         }));
     }
 
-    public void update(@NotNull UserHome user){
-        Bukkit.getConsoleSender().sendMessage("§8Atualizando jogador na tabela...");
-        CompletableFuture.runAsync(() -> executor.updateQuery(UPDATE_ONE_QUERY, stat ->{
-            stat.set(1, user.getHomeList());
-            stat.set(2, user.getLastDied());
-            stat.set(3, user.getName());
-            stat.set(4, user.getUuid());
+    public void update(@NotNull UserHome user) {
+        String homesJson = GSON.toJson(user.getHomeList());
+        CompletableFuture.runAsync(() -> executor.updateQuery(UPDATE_ONE_QUERY, stat -> {
+            stat.set(1, homesJson);
+            stat.set(2, user.getName());
+            stat.set(3, user.getUuid().toString());
         }));
     }
 
-    public UserHome select(@NotNull UUID uuid){
-        return executor.resultOneQuery(SELECT_ONE_QUERY, stat -> stat.set(1, uuid), SQLAdapter.class);
+
+    public UserHome select(@NotNull UUID uuid) {
+        UserHome user = executor.resultOneQuery(SELECT_ONE_QUERY, stat -> stat.set(1, uuid.toString()), SQLAdapter.class);
+        return user;
     }
+
+
 }

@@ -12,16 +12,20 @@ public class SQLController {
     private final SQLRepository repository;
     private final UserCache cache;
 
-    public void load(Player player){
+    public void load(Player player) {
         UserHome user = repository.select(player.getUniqueId());
 
-        if (user == null){
+        if (user == null) {
+            System.out.println("User not found in database, creating blank user.");
             user = createBlank(player);
             repository.insert(user);
+        } else {
+            System.out.println("User found in database: " + user);
         }
 
         cache.put(user.getUuid(), user);
     }
+
 
     public void update(UserHome userHome){
         repository.update(userHome);

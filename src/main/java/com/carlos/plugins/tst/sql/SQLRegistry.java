@@ -43,7 +43,7 @@ public class SQLRegistry implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event){
         final Player player = event.getPlayer();
-        controller.load(player);
+        this.controller.load(player);
     }
 
     @EventHandler
@@ -54,7 +54,7 @@ public class SQLRegistry implements Listener {
         if (user == null) return;
         if (!user.isDirty()) return;
 
-        controller.update(user);
+        this.controller.update(user);
         plugin.getCache().remove(user.getUuid());
     }
 

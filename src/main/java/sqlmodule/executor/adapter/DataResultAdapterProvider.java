@@ -16,7 +16,7 @@ public final class DataResultAdapterProvider {
     @Getter
     private static final DataResultAdapterProvider instance = new DataResultAdapterProvider();
 
-    private final Map<Class<? extends DataResultAdapter<?>>, DataResultAdapter<?>> adapterMap = new LinkedHashMap<>();
+    private final Map<Class, DataResultAdapter> adapterMap = new LinkedHashMap<>();
 
     /**
      * Obtém uma instância do adaptador para a classe fornecida. Se o adaptador ainda não foi criado, ele será instanciado.

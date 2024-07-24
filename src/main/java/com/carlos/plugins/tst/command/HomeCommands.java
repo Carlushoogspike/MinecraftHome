@@ -71,8 +71,9 @@ public class HomeCommands implements CommandExecutor {
                 }
 
                 Home home = new Home(homeName, location, false);
-                user.getHomeList().add(home);
+                user.getHomeList().put(home.getName(), home);
                 player.sendMessage(CustomTag.SUCCESS + "Você criou uma home chamada de §f" + home.getName());
+                plugin.getSql().getController().update(user);
             }
 
 
@@ -141,6 +142,7 @@ public class HomeCommands implements CommandExecutor {
 
                 h.setOpenPublic(false);
                 player.sendMessage(CustomTag.INFO + "Você definiu a home §f" + homeName + "§7 como §cPrivada");
+                plugin.getSql().getController().update(user);
             }
         }
 

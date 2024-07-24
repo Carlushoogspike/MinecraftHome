@@ -4,42 +4,38 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import org.bukkit.Location;
-import org.checkerframework.checker.units.qual.A;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
-@Data @Builder
+@Data
+@Builder
 public class UserHome {
 
     private String name;
     private UUID uuid;
-    private Location lastDied;
 
     @Builder.Default
-    private List<Home> homeList = new ArrayList<>();
+    private Map<String, Home> homeList = new HashMap<>();
 
     @Builder.Default
     private boolean dirty = false;
 
-    public boolean containsHome(String name){
-        return homeList.stream()
-                .anyMatch(home -> home.getName().equals(name));
+    public boolean containsHome(String name) {
+        return homeList.containsKey(name);
     }
 
-    public boolean existHomeInLocation(Location loc){
-        return homeList.stream()
+    public boolean existHomeInLocation(Location loc) {
+        return homeList.values().stream()
                 .anyMatch(home -> home.getLocation().equals(loc));
     }
 
-    public void removeHome(String name){
-        homeList.removeIf(home -> home.getName().equals(name));
+    public void removeHome(String name) {
+        homeList.remove(name);
     }
 
-    public Home getHome(String name){
-        return homeList.stream()
-                .filter(h -> h.getName().equalsIgnoreCase(name))
-                .findFirst().orElse(null);
+    public Home getHome(String name) {
+        return homeList.get(name);
     }
 }
