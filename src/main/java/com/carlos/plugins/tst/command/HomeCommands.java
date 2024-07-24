@@ -38,13 +38,16 @@ public class HomeCommands implements CommandExecutor {
 
                 String home = args[0];
 
-                if (user.containsHome(home)) {
-                    Home h = user.getHome(home);
-
-                    player.teleportAsync(h.getLocation());
-                    player.sendMessage(CustomTag.TELEPORTED + "Você foi teleportado para §f" + h.getName());
+                if (!user.containsHome(home)) {
+                    player.sendMessage(CustomTag.ERROR + "Você não tem uma home com esse nome");
                     return true;
                 }
+
+                Home h = user.getHome(home);
+
+                player.teleportAsync(h.getLocation());
+                player.sendMessage(CustomTag.TELEPORTED + "Você foi teleportado para §f" + h.getName());
+
             }
         }
 
