@@ -18,4 +18,24 @@ public class UserHome {
     private List<Home> homeList;
 
     private boolean dirty = false;
+
+    public boolean containsHome(String name){
+        return homeList.stream()
+                .anyMatch(home -> home.getName().equals(name));
+    }
+
+    public boolean existHomeInLocation(Location loc){
+        return homeList.stream()
+                .anyMatch(home -> home.getLocation().equals(loc));
+    }
+
+    public void removeHome(String name){
+        homeList.removeIf(home -> home.getName().equals(name));
+    }
+
+    public Home getHome(String name){
+        return homeList.stream()
+                .filter(h -> h.getName().equalsIgnoreCase(name))
+                .findFirst().orElse(null);
+    }
 }
