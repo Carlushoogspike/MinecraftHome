@@ -24,6 +24,6 @@ public class SQLAdapter implements DataResultAdapter<UserHome> {
         final Location location = dataResultSet.get("location");
         final List<Home> homes = GSON.fromJson((String) dataResultSet.get("homes"), homesType);
 
-        return new UserHome(name, uuid, location, homes);
+        return UserHome.builder().uuid(uuid).name(name).lastDied(location).homeList(homes).build();
     }
 }

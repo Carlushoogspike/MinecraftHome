@@ -6,6 +6,7 @@ import lombok.Data;
 import org.bukkit.Location;
 import org.checkerframework.checker.units.qual.A;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,8 +16,11 @@ public class UserHome {
     private String name;
     private UUID uuid;
     private Location lastDied;
-    private List<Home> homeList;
 
+    @Builder.Default
+    private List<Home> homeList = new ArrayList<>();
+
+    @Builder.Default
     private boolean dirty = false;
 
     public boolean containsHome(String name){
