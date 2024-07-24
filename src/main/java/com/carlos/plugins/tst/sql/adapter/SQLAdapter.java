@@ -19,11 +19,9 @@ public class SQLAdapter implements DataResultAdapter<UserHome> {
 
     @Override
     public UserHome adaptResult(DataResultSet dataResultSet) {
-        System.out.println("Adapting result set: " + dataResultSet);
         final UUID uuid = UUID.fromString(dataResultSet.get("uuid").toString());
         final String name = dataResultSet.get("name");
         final Map<String, Home> homes = GSON.fromJson((String) dataResultSet.get("homes"), homesType);
-        System.out.println("Adapted homes: " + homes);
         return UserHome.builder().uuid(uuid).name(name).homeList(homes).build();
     }
 

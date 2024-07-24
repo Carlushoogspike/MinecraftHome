@@ -16,11 +16,8 @@ public class SQLController {
         UserHome user = repository.select(player.getUniqueId());
 
         if (user == null) {
-            System.out.println("User not found in database, creating blank user.");
             user = createBlank(player);
             repository.insert(user);
-        } else {
-            System.out.println("User found in database: " + user);
         }
 
         cache.put(user.getUuid(), user);
