@@ -1,6 +1,5 @@
 plugins {
     id("java")
-    id("com.github.johnrengelman.shadow") version "7.1.1"
 }
 
 group = "com.carlos.plugins.tst"
@@ -31,18 +30,6 @@ tasks {
 
     withType(JavaCompile::class).configureEach {
         options.encoding = "UTF-8"
-    }
-
-    shadowJar {
-        mergeServiceFiles()
-
-        archiveFileName.set("Home.jar")
-        destinationDirectory.set(file("C:/GameDev/Server_1-21/plugins"))
-
-        dependencies {
-            exclude(dependency("org.yaml:snakeyaml"))
-        }
-
     }
 
 
