@@ -7,3 +7,14 @@ database:
     database: 'test'
   sqlite:
     users: 'database/users.db'
+
+cooldown:
+  enabled: true
+  time: 10
+  cancel-to-move: true
+
+particle:
+  enabled: true
+  key: 'HAPPY_VILLAGER'
+  color: ''
+  amount: 1
