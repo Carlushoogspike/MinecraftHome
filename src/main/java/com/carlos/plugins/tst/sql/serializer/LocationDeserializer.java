@@ -10,7 +10,19 @@ import org.bukkit.World;
 
 import java.lang.reflect.Type;
 
+/**
+ * A classe LocationDeserializer é responsável por desserializar um objeto JSON em uma instância de Location do Bukkit.
+ */
 public class LocationDeserializer implements JsonDeserializer<Location> {
+
+    /**
+     * Desserializa um elemento JSON em um objeto Location.
+     *
+     * @param jsonElement o elemento JSON a ser desserializado
+     * @param type o tipo de destino da desserialização
+     * @param jsonDeserializationContext o contexto da desserialização
+     * @return a localização desserializada
+     */
     @Override
     public Location deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) {
         JsonObject jsonObject = jsonElement.getAsJsonObject();

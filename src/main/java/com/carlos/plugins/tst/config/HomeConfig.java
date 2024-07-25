@@ -6,6 +6,9 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.Arrays;
 
+/**
+ * Classe de configurações do servidor
+ */
 @Getter
 public class HomeConfig {
 
@@ -19,6 +22,7 @@ public class HomeConfig {
     private String particleColor;
     private int particleAmount;
 
+    //realiza o trabalho de entender a config.yml e transmitir para codigo
     public HomeConfig(FileConfiguration config) {
         opIgnorePerms = config.getBoolean("op-ignore-perms");
         if (config.contains("cooldown")) {

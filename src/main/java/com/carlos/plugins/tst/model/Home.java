@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import org.bukkit.Location;
 
+/**
+ * Classe de modelo Home
+ */
 @AllArgsConstructor
 @Builder
 @Data

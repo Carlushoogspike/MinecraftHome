@@ -9,21 +9,28 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
+/**
+ * Classe para registar os eventos necessario para as homes
+ */
 @RequiredArgsConstructor
 public class HomeListener implements Listener {
 
     private final CooldownManager manager;
     private final HomeConfig config;
 
+    //evento para detectar a movimentação
     @EventHandler
     public void onMove(PlayerMoveEvent event) {
-        Player player = event.getPlayer();
+        Player player = event.getPlayer(); //obtem o jogador
 
-        if (config.isOpIgnorePerms() && player.isOp()) return;
+        if (config.isOpIgnorePerms() && player.isOp()) return; //verifica se ele tem op e se ta para ignorar as permissões
 
-        if (!config.isCooldown()) return;
-        if (!config.isCancelToMove()) return;
+        if (!config.isCooldown()) return; //se o cooldown ta ativado
+        if (!config.isCancelToMove()) return; //se ta proibido de se mexer
 
+        //obtem as localização de
+        //ONDE -> local de dados do momento agora
+        //FROM -> local de futuro dados
 
         int toX = event.getTo().getBlockX();
         int toY = event.getTo().getBlockY();
@@ -33,6 +40,7 @@ public class HomeListener implements Listener {
         int fromY = event.getFrom().getBlockY();
         int fromZ = event.getFrom().getBlockZ();
 
+        //se eles forem diferentes, irá cancelar a task
         if (toX != fromX || toY != fromY || toZ != fromZ) {
             if (manager.isCooldown(player)){
                 manager.leaveCooldown(player);

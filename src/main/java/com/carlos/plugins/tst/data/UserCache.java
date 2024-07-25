@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * Classe de armazenamento de memoria do servidor, onde fica os player e sua home, durante o funcionamento do servidor
+ */
 public class UserCache {
 
     @Delegate
